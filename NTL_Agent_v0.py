@@ -6,6 +6,8 @@ from langgraph.prebuilt import create_react_agent
 import os
 from langchain_core.tools import Tool
 from langchain_experimental.utilities import PythonREPL
+import ee
+from GEE_Chain import NTL_download_tool
 
 python_repl = PythonREPL()
 # You can create the tool to pass to an agent
@@ -14,6 +16,11 @@ repl_tool = Tool(
     description="A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`.",
     func=python_repl.run,
 )
+
+# Initialize Google Earth Engine
+# ee.Authenticate()
+project_id = 'empyrean-caster-430308-m2'
+ee.Initialize(project=project_id)
 
 # Set environment variables
 def set_env_variable(var_name, default_value=None):
@@ -57,7 +64,7 @@ The final answer should be streamlined while maintaining completeness.
 """)
 
 # Initialize language model and bind tools
-llm_GPT = ChatOpenAI(model="gpt-4.1-nano", temperature=0, max_retries=3)
+llm_GPT = ChatOpenAI(model="gpt-4.1-mini", temperature=0, max_retries=3)
 memory = MemorySaver()
 graph = create_react_agent(llm_GPT, tools=tools, state_modifier=system_prompt_text, checkpointer=memory)
 

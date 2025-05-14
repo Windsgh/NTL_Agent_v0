@@ -57,7 +57,7 @@ The final answer should be streamlined while maintaining completeness.
 """)
 
 # Initialize language model and bind tools
-llm_GPT = ChatOpenAI(model="gpt-4.1-mini", temperature=0, max_retries=3)
+llm_GPT = ChatOpenAI(model="gpt-4.1-nano", temperature=0, max_retries=3)
 memory = MemorySaver()
 graph = create_react_agent(llm_GPT, tools=tools, state_modifier=system_prompt_text, checkpointer=memory)
 

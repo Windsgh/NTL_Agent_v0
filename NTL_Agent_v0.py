@@ -7,7 +7,7 @@ import os
 from langchain_core.tools import Tool
 from langchain_experimental.utilities import PythonREPL
 import ee
-from GEE_Chain import NTL_download_tool
+from NTL_download import NTL_download_tool
 
 python_repl = PythonREPL()
 # You can create the tool to pass to an agent
@@ -50,7 +50,7 @@ for var, value in env_vars.items():
 
 # warnings.filterwarnings("ignore")
 
-tools = [repl_tool]
+tools = [repl_tool,NTL_download_tool]
 
 system_prompt_text = SystemMessage("""
 You are an expert in nighttime light image processing and analysing(named Chat-NTL),

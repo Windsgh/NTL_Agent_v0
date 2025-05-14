@@ -5,3 +5,4 @@ langchain_anthropic
 langchain_openai
 langchain_chroma
 streamlit
+langchain-experimental

@@ -4,8 +4,16 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.prebuilt import create_react_agent
 import os
-from langchain_anthropic import ChatAnthropic
+from langchain_core.tools import Tool
+from langchain_experimental.utilities import PythonREPL
 
+python_repl = PythonREPL()
+# You can create the tool to pass to an agent
+repl_tool = Tool(
+    name="python_repl",
+    description="A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`.",
+    func=python_repl.run,
+)
 
 # Set environment variables
 def set_env_variable(var_name, default_value=None):
@@ -34,6 +42,9 @@ for var, value in env_vars.items():
 
 
 # warnings.filterwarnings("ignore")
+
+tools = [repl_tool]
+
 system_prompt_text = SystemMessage("""
 You are an expert in nighttime light image processing and analysing(named Chat-NTL),
 If you need additional information, e.g. night lighting or geospatial analysis or programming related knowledge, please seek help from Information_Retriever;
@@ -47,14 +58,6 @@ The final answer should be streamlined while maintaining completeness.
 
 # Initialize language model and bind tools
 llm_GPT = ChatOpenAI(model="gpt-4.1-mini", temperature=0, max_retries=3)
-llm_qwen = ChatOpenAI(
-    api_key=os.getenv("DASHSCOPE_API_KEY"),
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-    model="qwen-max",
-    max_retries=3
-)
-llm_claude = ChatAnthropic(model="claude-3-5-sonnet-latest", temperature=0, max_retries=3)
-
 memory = MemorySaver()
-graph = create_react_agent(llm_GPT, state_modifier=system_prompt_text, checkpointer=memory)
+graph = create_react_agent(llm_GPT, tools=tools, state_modifier=system_prompt_text, checkpointer=memory)
 

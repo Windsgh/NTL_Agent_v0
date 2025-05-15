@@ -9,3 +9,4 @@ langchain-experimental
 pydantic
 geemap
 earthengine-api
+setuptools>=65.0.0

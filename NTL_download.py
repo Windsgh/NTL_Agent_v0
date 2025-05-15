@@ -8,8 +8,10 @@ class NightlightDataInput(BaseModel):
                                 description="Data type options: 'annual', 'monthly' or 'daily'.")
     time_range_input: str = Field(...,
                                   description="Time range in the format 'YYYY-MM to YYYY-MM'. Example: '2020-01 to 2020-02'")
-    export_folder: str = Field(...,
-                               description="The local folder path of the exported file. Example:'C:/NTL_Agent/Night_data/Nanjing'")
+    export_folder: str = Field(
+        "./NTL_data",
+        description="The local relative folder path of the exported file. Example: './NTL_data'"
+    )
     collection_name: str = Field(None, description="The name of the collection")
 
 
@@ -222,7 +224,7 @@ NTL_download_tool = StructuredTool.from_function(
             scale_level='city',
             dataset_choice='daily',
             time_range_input='2020-01-01 to 2020-02-01',
-            export_folder='C:/NTL_Agent/Night_data/Nanjing',
+            export_folder='./NTL_data',
         )
         or
         (

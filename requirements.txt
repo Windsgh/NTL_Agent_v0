@@ -11,6 +11,7 @@ geopy
 rasterio
 geemap
 earthengine-api
+h5py
 
 # 图像处理
 opencv-python

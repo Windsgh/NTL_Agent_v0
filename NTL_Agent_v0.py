@@ -18,7 +18,7 @@ repl_tool = Tool(
 )
 
 # Initialize Google Earth Engine
-# ee.Authenticate()
+ee.Authenticate(auth_mode='notebook')
 project_id = 'empyrean-caster-430308-m2'
 ee.Initialize(project=project_id)
 

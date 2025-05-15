@@ -9,4 +9,3 @@ langchain-experimental
 pydantic
 earthengine-api
 geemap
-calendar

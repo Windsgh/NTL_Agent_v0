@@ -1,12 +1,47 @@
+# 基础数据处理
+pandas
+numpy
+tqdm
+requests
+
+# 地理空间相关
+geopandas
+shapely
+geopy
+rasterio
+geemap
+earthengine-api
+
+# 图像处理
+opencv-python
+scikit-image  # 对应 skimage
+
+# 可视化
+matplotlib
+
+# LangChain 和 AI 模型相关
 langchain
-langgraph 
+langgraph
 langchain_community
+langchain_experimental
 langchain_anthropic
 langchain_openai
 langchain_chroma
+
+# Streamlit Web 前端
 streamlit
-langchain-experimental
+
+# Pydantic 用于数据验证
 pydantic
-geemap
-earthengine-api
+
+# IPython 执行环境
+ipython
+
+# 趋势分析相关
+pymannkendall
+
+# 确保 setuptools 存在
 setuptools>=65.0.0
+
+#pip install -r requirements.txt
+
